@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7f17a28cc710488f964bf1680e11a2b1" Name="Diagram1">
+        <EntityTypeShape EntityType="VVPModel.Users" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VVPModel.Applications" Width="1.5" PointX="5.625" PointY="4.375" />
+        <EntityTypeShape EntityType="VVPModel.Awards" Width="1.5" PointX="8.625" PointY="4.375" />
+        <EntityTypeShape EntityType="VVPModel.Logs" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="VVPModel.Scholarships" Width="1.5" PointX="3.375" PointY="9.375" />
+        <EntityTypeShape EntityType="VVPModel.Students" Width="1.5" PointX="3.375" PointY="3.75" />
+        <AssociationConnector Association="VVPModel.FK__Applicati__Schol__74AE54BC" />
+        <AssociationConnector Association="VVPModel.FK__Applicati__Stude__73BA3083" />
+        <AssociationConnector Association="VVPModel.FK__Awards__Scholars__787EE5A0" />
+        <AssociationConnector Association="VVPModel.FK__Awards__StudentI__778AC167" />
+        <AssociationConnector Association="VVPModel.FK__Logs__UserID__7C4F7684" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

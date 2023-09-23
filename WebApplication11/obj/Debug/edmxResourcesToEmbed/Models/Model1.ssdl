@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VVPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Applications">
+    <Key>
+      <PropertyRef Name="ApplicationID" />
+    </Key>
+    <Property Name="ApplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentID" Type="int" />
+    <Property Name="ScholarshipID" Type="int" />
+    <Property Name="ApplicationDate" Type="date" />
+    <Property Name="Status" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Awards">
+    <Key>
+      <PropertyRef Name="AwardID" />
+    </Key>
+    <Property Name="AwardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentID" Type="int" />
+    <Property Name="ScholarshipID" Type="int" />
+    <Property Name="AwardDate" Type="date" />
+    <Property Name="AmountAwarded" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="Logs">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="ActivityDescription" Type="text" />
+    <Property Name="LogDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Scholarships">
+    <Key>
+      <PropertyRef Name="ScholarshipID" />
+    </Key>
+    <Property Name="ScholarshipID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="Description" Type="text" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Deadline" Type="date" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+    <Property Name="Address" Type="varchar" MaxLength="255" />
+    <Property Name="CollegeName" Type="varchar" MaxLength="100" />
+    <Property Name="CollegeAddress" Type="varchar" MaxLength="255" />
+    <Property Name="ParentFirstName" Type="varchar" MaxLength="50" />
+    <Property Name="ParentLastName" Type="varchar" MaxLength="50" />
+    <Property Name="ParentEmail" Type="varchar" MaxLength="100" />
+    <Property Name="ParentPhone" Type="varchar" MaxLength="20" />
+    <Property Name="RegistrationDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Applicati__Schol__74AE54BC">
+    <End Role="Scholarships" Type="Self.Scholarships" Multiplicity="0..1" />
+    <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scholarships">
+        <PropertyRef Name="ScholarshipID" />
+      </Principal>
+      <Dependent Role="Applications">
+        <PropertyRef Name="ScholarshipID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Applicati__Stude__73BA3083">
+    <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+    <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="Applications">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Awards__Scholars__787EE5A0">
+    <End Role="Scholarships" Type="Self.Scholarships" Multiplicity="0..1" />
+    <End Role="Awards" Type="Self.Awards" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scholarships">
+        <PropertyRef Name="ScholarshipID" />
+      </Principal>
+      <Dependent Role="Awards">
+        <PropertyRef Name="ScholarshipID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Awards__StudentI__778AC167">
+    <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+    <End Role="Awards" Type="Self.Awards" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="Awards">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Logs__UserID__7C4F7684">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Logs">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="VVPModelStoreContainer">
+    <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Awards" EntityType="Self.Awards" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Scholarships" EntityType="Self.Scholarships" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Applicati__Schol__74AE54BC" Association="Self.FK__Applicati__Schol__74AE54BC">
+      <End Role="Scholarships" EntitySet="Scholarships" />
+      <End Role="Applications" EntitySet="Applications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Applicati__Stude__73BA3083" Association="Self.FK__Applicati__Stude__73BA3083">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Applications" EntitySet="Applications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Awards__Scholars__787EE5A0" Association="Self.FK__Awards__Scholars__787EE5A0">
+      <End Role="Scholarships" EntitySet="Scholarships" />
+      <End Role="Awards" EntitySet="Awards" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Awards__StudentI__778AC167" Association="Self.FK__Awards__StudentI__778AC167">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Awards" EntitySet="Awards" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Logs__UserID__7C4F7684" Association="Self.FK__Logs__UserID__7C4F7684">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Logs" EntitySet="Logs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
